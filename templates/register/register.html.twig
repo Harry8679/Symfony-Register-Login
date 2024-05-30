@@ -5,8 +5,12 @@
 
 {% block body %}
 	<div class="container">
-		<h1>Espace inscription</h1>
+		<h1 class="text-center">Espace inscription</h1>
 		<hr>
-		{{ form(formRegister) }}
+		<div class="row justify-content-center">
+            <div class="col-md-6">
+                {{ form(formRegister) }}
+            </div>
+        </div>
 	</div>
 {% endblock %}
