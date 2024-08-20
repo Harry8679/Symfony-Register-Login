@@ -14,6 +14,7 @@ use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Regex;
+use App\Validator\UniqueEmail;
 
 class RegisterType extends AbstractType
 {
@@ -62,7 +63,8 @@ class RegisterType extends AbstractType
                     ]),
                     new Email([
                         'message' => 'Veuillez renseigner un email valide.'
-                    ])
+                    ]),
+                    new UniqueEmail()
                 ],
                 'attr' => [
                     'placeholder' => 'Veuillez renseigner votre email'

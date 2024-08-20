@@ -22,3 +22,9 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    # Ajouter le service pour la validation
+    App\Validator\UniqueEmailValidator:
+        arguments:
+            $userRepository: '@App\Repository\UserRepository'
+        tags: ['validator.constraint_validator']
