@@ -8,5 +8,11 @@
 		<div class="mt-4 p-5 bg-secondary text-white rounded">
 			<h1>Bienvenue sur notre page d'accueil</h1>
 		</div>
+
+		{% for message in app.flashes('success') %}
+			<div class="alert alert-success mt-4">
+				{{ message }}
+			</div>
+		{% endfor %}
 	</div>
 {% endblock %}
