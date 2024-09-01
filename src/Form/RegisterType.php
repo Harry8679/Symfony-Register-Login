@@ -15,6 +15,7 @@ use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Regex;
 use App\Validator\UniqueEmail;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 
 class RegisterType extends AbstractType
 {
@@ -70,8 +71,8 @@ class RegisterType extends AbstractType
                     'placeholder' => 'Veuillez renseigner votre email'
                 ]
             ])
-            ->add('password', PasswordType::class, [
-                'label' => 'Votre mot de passe',
+            ->add('plainPassword', RepeatedType::class, [
+                'type' => PasswordType::class,
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Veuillez renseigner votre mot de passe.'
@@ -87,10 +88,41 @@ class RegisterType extends AbstractType
                         'message' => 'Le mot de passe doit contenir au minimum une majuscule, une minuscule et un chiffre'
                     ])
                 ],
-                'attr' => [
-                    'placeholder' => 'Veuillez renseigner votre mot de passe'
+                'mapped' => false,
+                'first_options' => [
+                    'label' => 'Votre mot de passe',
+                    'attr' => [
+                        'placeholder' => 'Veuillez renseigner votre mot de passe'
+                    ]
+                ],
+                'second_options' => [
+                    'label' => 'Confirmez votre mot de passe',
+                    'attr' => [
+                        'placeholder' => 'Veuillez confirmer votre mot de passe'
+                    ]
                 ]
             ])
+            // ->add('password', PasswordType::class, [
+            //     'label' => 'Votre mot de passe',
+            //     'constraints' => [
+            //         new NotBlank([
+            //             'message' => 'Veuillez renseigner votre mot de passe.'
+            //         ]),
+            //         new Length([
+            //             'min'=> 8,
+            //             'max'=> 128,
+            //             'minMessage' => 'Le mot de passe doit contenir au moins {{ limit }} caractères',
+            //             'maxMessage' => 'Le mot de passe doit contenir au plus {{ limit }} caractères'
+            //         ]),
+            //         new Regex([
+            //             'pattern' => '/(?=.*[A-Z])(?=.*[a-z])(?=.*\d)/',
+            //             'message' => 'Le mot de passe doit contenir au minimum une majuscule, une minuscule et un chiffre'
+            //         ])
+            //     ],
+            //     'attr' => [
+            //         'placeholder' => 'Veuillez renseigner votre mot de passe'
+            //     ]
+            // ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Inscription',
                 'attr' => [
